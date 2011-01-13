@@ -24,11 +24,11 @@ use Params::Util qw( _HASHLIKE _ARRAY );
 use File::pushd;
 use Moose qw( has );
 
-has 'verbose'    => ( isa => 'Int',  is => 'ro', writer => 'set_verbose',   default => 1, );
-has 'lax'        => ( isa => 'Int',  is => 'ro', writer => 'set_lax',       default => 1, );
-has 'changelog'  => ( isa => 'Bool', is => 'ro', writer => 'set_changelog', default => 1, );
+has 'verbose'    => ( isa => 'Int',  is => 'ro', writer => 'set_verbose',    default => 1, );
+has 'lax'        => ( isa => 'Int',  is => 'ro', writer => 'set_lax',        default => 1, );
+has 'changelog'  => ( isa => 'Bool', is => 'ro', writer => 'set_changelog',  default => 1, );
 has 'remove_old' => ( isa => 'Bool', is => 'ro', writer => 'set_remove_old', default => 1, );
-has 'commit'     => ( isa => 'Bool', is => 'ro', writer => 'set_commit',    default => 1, );
+has 'commit'     => ( isa => 'Bool', is => 'ro', writer => 'set_commit',     default => 1, );
 
 has 'manifest'   => ( isa => 'Bool', is => 'ro', writer => 'set_manifest',   default => 1, );
 has 'copyright'  => ( isa => 'Bool', is => 'ro', writer => 'set_copyright',  default => 1, );
@@ -111,25 +111,25 @@ sub _fix_file_single {
   $self->add_to_scm($newfile);
 
   if ( $self->remove_old ) {
-    $self->rm_from_scm($filename);
+    $self->_rm_from_scm($filename);
   }
 
-  $self->do_manifest($newfile);
+  $self->_do_manifest($newfile);
 
-  $self->add_to_scm( file($newfile)->dir->file("ChangeLog") );
-  $self->add_to_scm( file($newfile)->dir->file("Manifest") );
+  $self->_add_to_scm( file($newfile)->dir->file("ChangeLog") );
+  $self->_add_to_scm( file($newfile)->dir->file("Manifest") );
 
-  $self->do_changelog( $newfile, $version, $newversion );
+  $self->_do_changelog( $newfile, $version, $newversion );
 
-  $self->add_to_scm( file($newfile)->dir->file("ChangeLog") );
-  $self->add_to_scm( file($newfile)->dir->file("Manifest") );
+  $self->_add_to_scm( file($newfile)->dir->file("ChangeLog") );
+  $self->_add_to_scm( file($newfile)->dir->file("Manifest") );
 
-  if( $self->commit ){
-      $self->commit_to_scm( $newfile, $package, $version, $newversion );
+  if ( $self->commit ) {
+    $self->_commit_to_scm( $newfile, $package, $version, $newversion );
   }
 }
 
-sub add_to_scm {
+sub _add_to_scm {
   my ( $self, $filename ) = @_;
   $self->log( 2, "adding $filename to SCM", 'addtoscm' );
   my $pushd = pushd( file($filename)->dir );
@@ -140,7 +140,7 @@ sub add_to_scm {
   };
 }
 
-sub rm_from_scm {
+sub _rm_from_scm {
   my ( $self, $filename ) = @_;
   $self->log( 2, "removing $filename to SCM", 'rmfromscm' );
   my $pushd = pushd( file($filename)->dir );
@@ -150,7 +150,8 @@ sub rm_from_scm {
     $self->log( 2, "Error from systemcall : $!", 'rmfromscm' );
   };
 }
-sub commit_to_scm {
+
+sub _commit_to_scm {
   my ( $self, $filename, $package, $oldversion, $newversion ) = @_;
   $self->log( 2, "committing to SCM", 'committoscm' );
   my $pushd = pushd( file($filename)->dir );
@@ -161,8 +162,7 @@ sub commit_to_scm {
   };
 }
 
-
-sub do_manifest {
+sub _do_manifest {
   my ( $self, $filename ) = @_;
   $self->log( 2, "manifesting dir of $filename", 'manifest' );
   return unless $self->manifest;
@@ -174,7 +174,7 @@ sub do_manifest {
   };
 }
 
-sub do_changelog {
+sub _do_changelog {
   my ( $self, $filename, $oldversion, $newversion ) = @_;
   $self->log( 2, "updating changelog for $filename", 'changelog' );
   return unless $self->changelog;
@@ -297,7 +297,7 @@ sub _fix_copyright {
 
     if ( $line =~ /^#\sCopyright\s(\d+)-(\d+)\sGentoo\sFoundation/ ) {
       my $od = $1;
-      my $d = $2;
+      my $d  = $2;
       $count++;
       $self->log( 2, "Copyright found on line $_", 'fixcopyright' );
       if ( "$d" eq "$year" ) {
