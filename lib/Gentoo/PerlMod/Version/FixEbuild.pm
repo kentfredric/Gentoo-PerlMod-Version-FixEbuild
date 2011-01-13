@@ -200,6 +200,16 @@ sub _check_env {
   return;
 }
 
+=method fix_file
+
+    $instance->fix_file( @file_list )
+    $instance->fix_file( $file );
+    $instance->fix_file( \%config_overrides , @file_list );
+
+Fixes the given files.
+
+=cut
+
 sub fix_file {
   my ( $self, @files ) = @_;
   if ( _HASHLIKE( $files[1] ) ) {
