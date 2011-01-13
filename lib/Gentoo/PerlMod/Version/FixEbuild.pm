@@ -5,6 +5,18 @@ package Gentoo::PerlMod::Version::FixEbuild;
 
 # ABSTRACT: Automatically fix an old-style ebuild to a new style ebuild.
 
+=head1 SYNOPSIS
+
+This module is severely incomplete and only 'Just Works'.
+
+see the accompanying script for usage.
+
+This is currently my poorest quality module on CPAN, and this is just a release to get this horrible beast off my machine.
+
+The code is horrible, and far too complex for this and needs a serious overhaul. (yes, already, too much featureitis )
+
+=cut
+
 use Carp qw( confess carp cluck croak );
 use Gentoo::PerlMod::Version qw( gentooize_version );
 use Path::Class qw( file dir );
