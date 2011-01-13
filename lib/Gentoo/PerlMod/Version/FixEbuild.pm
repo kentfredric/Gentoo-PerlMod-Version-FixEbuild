@@ -2,20 +2,12 @@ use strict;
 use warnings;
 
 package Gentoo::PerlMod::Version::FixEbuild;
+BEGIN {
+  $Gentoo::PerlMod::Version::FixEbuild::VERSION = '0.1.0';
+}
 
 # ABSTRACT: Automatically fix an old-style ebuild to a new style ebuild.
 
-=head1 SYNOPSIS
-
-This module is severely incomplete and only 'Just Works'.
-
-see the accompanying script for usage.
-
-This is currently my poorest quality module on CPAN, and this is just a release to get this horrible beast off my machine.
-
-The code is horrible, and far too complex for this and needs a serious overhaul. (yes, already, too much featureitis )
-
-=cut
 
 use Carp qw( confess carp cluck croak );
 use Gentoo::PerlMod::Version qw( gentooize_version );
@@ -200,15 +192,6 @@ sub _check_env {
   return;
 }
 
-=method fix_file
-
-    $instance->fix_file( @file_list )
-    $instance->fix_file( $file );
-    $instance->fix_file( \%config_overrides , @file_list );
-
-Fixes the given files.
-
-=cut
 
 sub fix_file {
   my ( $self, @files ) = @_;
@@ -424,3 +407,48 @@ sub _inject_version {
 
 __PACKAGE__->meta->make_immutable;
 1;
+
+__END__
+=pod
+
+=head1 NAME
+
+Gentoo::PerlMod::Version::FixEbuild - Automatically fix an old-style ebuild to a new style ebuild.
+
+=head1 VERSION
+
+version 0.1.0
+
+=head1 SYNOPSIS
+
+This module is severely incomplete and only 'Just Works'.
+
+see the accompanying script for usage.
+
+This is currently my poorest quality module on CPAN, and this is just a release to get this horrible beast off my machine.
+
+The code is horrible, and far too complex for this and needs a serious overhaul. (yes, already, too much featureitis )
+
+=head1 METHODS
+
+=head2 fix_file
+
+    $instance->fix_file( @file_list )
+    $instance->fix_file( $file );
+    $instance->fix_file( \%config_overrides , @file_list );
+
+Fixes the given files.
+
+=head1 AUTHOR
+
+Kent Fredric <kentnl@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
