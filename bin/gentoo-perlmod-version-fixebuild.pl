@@ -1,9 +1,12 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 use strict;
 use warnings;
 
 package Gentoo::PerlMod::Version::Tool::Fix;
+BEGIN {
+  $Gentoo::PerlMod::Version::Tool::Fix::VERSION = '0.1.1';
+}
 
 # PODNAME: gentoo-perlmod-version-fixebuild.pl
 # ABSTRACT: Automatically fix an old-style ebuild to a new style ebuild.
@@ -11,13 +14,6 @@ package Gentoo::PerlMod::Version::Tool::Fix;
 use Gentoo::PerlMod::Version::FixEbuild;
 use Carp qw( croak );
 
-=head1 SYNOPSIS
-
-    gentoo-perlmod-version-fixebuild.pl path/too/foo-5.6.ebuild
-
-    gentoo-perlmod-version-fixebuild.pl --changelog --manifest path/too/foo-5.6.ebuild
-
-=cut
 
 my $conf = {
 
@@ -185,4 +181,35 @@ my $fixer = Gentoo::PerlMod::Version::FixEbuild->new( %$conf );
 for (@files) {
   $fixer->fix_file($_);
 }
+
+
+__END__
+=pod
+
+=head1 NAME
+
+gentoo-perlmod-version-fixebuild.pl - Automatically fix an old-style ebuild to a new style ebuild.
+
+=head1 VERSION
+
+version 0.1.1
+
+=head1 SYNOPSIS
+
+    gentoo-perlmod-version-fixebuild.pl path/too/foo-5.6.ebuild
+
+    gentoo-perlmod-version-fixebuild.pl --changelog --manifest path/too/foo-5.6.ebuild
+
+=head1 AUTHOR
+
+Kent Fredric <kentnl@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
 

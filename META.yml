@@ -20,7 +20,7 @@ name: Gentoo-PerlMod-Version-FixEbuild
 provides:
   Gentoo::PerlMod::Version::FixEbuild:
     file: lib/Gentoo/PerlMod/Version/FixEbuild.pm
-    version: v0.1.0
+    version: v0.1.1
 requires:
   Carp: 0
   File::pushd: 0
@@ -31,7 +31,7 @@ requires:
 resources:
   homepage: http://github.com/kentfredric/Gentoo-PerlMod-Version-FixEbuild/tree
   repository: git://github.com/kentfredric/Gentoo-PerlMod-Version-FixEbuild.git
-version: 0.1.0
+version: 0.1.1
 x_BuiltWith:
   modules:
     Carp: 1.17
@@ -39,7 +39,7 @@ x_BuiltWith:
     Dist::Zilla::PluginBundle::KENTNL::Lite: 0.01000002
     File::Temp: 0.22
     File::pushd: 1.00
-    Gentoo::PerlMod::Version: 0.2.0
+    Gentoo::PerlMod::Version: 0.2.2
     Module::Build: 0.3607
     Moose: 1.21
     Params::Util: 1.03
@@ -243,6 +243,10 @@ x_Dist_Zilla:
           phase: runtime
           type: requires
       name: Prereqs
+      version: 4.200000
+    -
+      class: Dist::Zilla::Plugin::ExecDir
+      name: ExecDir
       version: 4.200000
     -
       class: Dist::Zilla::Plugin::FinderCode

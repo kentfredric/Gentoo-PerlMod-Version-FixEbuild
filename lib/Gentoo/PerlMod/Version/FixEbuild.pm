@@ -3,7 +3,7 @@ use warnings;
 
 package Gentoo::PerlMod::Version::FixEbuild;
 BEGIN {
-  $Gentoo::PerlMod::Version::FixEbuild::VERSION = '0.1.0';
+  $Gentoo::PerlMod::Version::FixEbuild::VERSION = '0.1.1';
 }
 
 # ABSTRACT: Automatically fix an old-style ebuild to a new style ebuild.
@@ -100,7 +100,7 @@ sub _fix_file_single {
 
   $self->_write_file( $newfile, $lines );
 
-  $self->add_to_scm($newfile);
+  $self->_add_to_scm($newfile);
 
   if ( $self->remove_old ) {
     $self->_rm_from_scm($filename);
@@ -417,7 +417,7 @@ Gentoo::PerlMod::Version::FixEbuild - Automatically fix an old-style ebuild to a
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SYNOPSIS
 

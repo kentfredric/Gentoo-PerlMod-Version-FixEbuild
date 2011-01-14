@@ -21,7 +21,7 @@ my %module_build_args = (
     'Kent Fredric <kentnl@cpan.org>'
   ],
   'dist_name' => 'Gentoo-PerlMod-Version-FixEbuild',
-  'dist_version' => '0.1.0',
+  'dist_version' => '0.1.1',
   'license' => 'perl',
   'module_name' => 'Gentoo::PerlMod::Version::FixEbuild',
   'recommends' => {},
@@ -34,7 +34,9 @@ my %module_build_args = (
     'Params::Util' => '0',
     'Path::Class' => '0'
   },
-  'script_files' => []
+  'script_files' => [
+    'bin/gentoo-perlmod-version-fixebuild.pl'
+  ]
 );
 
 

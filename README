@@ -3,7 +3,7 @@ NAME
     ebuild to a new style ebuild.
 
 VERSION
-    version 0.1.0
+    version 0.1.1
 
 SYNOPSIS
     This module is severely incomplete and only 'Just Works'.
