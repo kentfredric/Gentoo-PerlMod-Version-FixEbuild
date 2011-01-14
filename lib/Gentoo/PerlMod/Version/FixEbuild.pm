@@ -108,7 +108,7 @@ sub _fix_file_single {
 
   $self->_write_file( $newfile, $lines );
 
-  $self->add_to_scm($newfile);
+  $self->_add_to_scm($newfile);
 
   if ( $self->remove_old ) {
     $self->_rm_from_scm($filename);
